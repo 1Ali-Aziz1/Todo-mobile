@@ -1,14 +1,26 @@
-import { StyleSheet } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, TextInput } from 'react-native';
 
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
+import { Text, View } from '../../components/Themed'; 
 
 export default function TabOneScreen() {
+
+  //Below todo means the text
+  const [todo, setTodo] = useState("")
+  //this state contains all the todoos
+  const [todoData, setTodoData] = useState([{id: 1, title: "Whow"}, {id: 2, title: "nanan"}])
+
+  function ShowAddtext() {
+    return(
+      <View>
+        <TextInput style={styles.input} placeholder="Type what todo..." value={todo} onChangeText={setTodo} />
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <ShowAddtext/>
     </View>
   );
 }
@@ -16,16 +28,12 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  input: {
+    height: 40,
+    width: "75%",
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
 });
